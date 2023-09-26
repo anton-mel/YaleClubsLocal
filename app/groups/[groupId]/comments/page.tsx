@@ -7,9 +7,17 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 
+interface Comment {
+    id: string;
+    content: string;
+}
 
-const Comments = ({ groupId } : { groupId: string }) => {
-    const [comments, setComments] = useState<any>([]);
+interface CommentsProps {
+    groupId: string | null;
+}
+  
+const Comments: React.FC<CommentsProps> = ({ groupId }) => {
+    const [comments, setComments] = useState<Comment[]>([]);
 
     const {
         register,
@@ -24,7 +32,7 @@ const Comments = ({ groupId } : { groupId: string }) => {
         }
     });
 
-    const fetchComments = async (groupId: string) => {
+    const fetchComments = async (groupId: string | null) => {
         try {
             const response = await axios.get(`/api/getcomments/${groupId}`);
             return response;
@@ -99,7 +107,7 @@ const Comments = ({ groupId } : { groupId: string }) => {
             <div className="mt-5">
                 <h2 className="text-xl font-semibold mb-3">Comments:</h2>
                 <ul>
-                {comments.map((comment:any) => (
+                {comments.map((comment) => (
                     <li key={comment.id} className="mb-2">
                     {comment.content}
                     </li>
