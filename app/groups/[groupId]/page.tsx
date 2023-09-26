@@ -37,7 +37,7 @@ const GroupId = async ({ params } : {params : IParams}) => {
                 <div className="flex grid-cols-2 gap-5">
                     <AboutGroup group={groups[0]} /> 
                 </div>    
-                <Comments groupId={...params.groupId} />
+                <Comments groupId={params.groupId} />
             </div>
         </>
     );
