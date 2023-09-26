@@ -8,11 +8,7 @@ import toast from "react-hot-toast";
 
 
 
-interface CommentsProps {
-    groupId: string;
-}
-  
-const Comments: React.FC<CommentsProps> = ({ groupId }) => {
+const Comments = ({ groupId } : {groupId: string}) => {
     const [comments, setComments] = useState<any>([]);
 
     const {
