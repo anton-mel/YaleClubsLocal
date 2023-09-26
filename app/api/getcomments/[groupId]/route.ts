@@ -13,7 +13,7 @@ export async function GET (
                 "groupNetid": params.groupId
             },
             orderBy: { 
-                createdAt: 'asc',
+                createdAt: 'desc',
             },
         });
 
