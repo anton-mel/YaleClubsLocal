@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
 import { getGroups } from "@/app/actions/getGroups";
 import { Header } from "@/app/components/Header";
 import { AboutGroup } from "./components/AboutGroup";
-import { Comments } from "./comments/page";
+import Comments from "./comments/page";
 
 interface IParams {
     groupId: string;

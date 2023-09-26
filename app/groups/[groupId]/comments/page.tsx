@@ -5,10 +5,20 @@ import React, { useEffect, useState } from "react";
 import MessageInput from "./components/MessageInput";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import getComments from "@/app/actions/getComments";
+import toast from "react-hot-toast";
 
 
+interface Comment {
+    id: string;
+    content: string;
+}
 
-export const Comments = ({groupId} : {groupId: string}) => {
+interface CommentsProps {
+    groupId: string;
+}
+  
+const Comments: React.FC<CommentsProps> = ({ groupId }) => {
+    const [comments, setComments] = useState<Comment[]>([]);
 
     const {
         register,
@@ -23,31 +33,39 @@ export const Comments = ({groupId} : {groupId: string}) => {
         }
     });
 
-    // FIX IT to normal interface later on!
-    const [comments, setComments] = useState<any[]>([]);
+    const fetchComments = async (groupId: string) => {
+        try {
+            const response = await axios.get(`/api/getcomments/${groupId}`);
+            return response;
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+            throw error;
+        }
+    };
 
-    // Fetch comments here
     useEffect(() => {
-        const fetchComments = async () => {
-            try {
-                const response = await getComments(groupId);
-                setComments(response);
-            } catch (error) {
-                console.error("Error fetching comments:", error);
-            }
-        };
+        if (groupId) {
+            fetchComments(groupId).then((response) => {
+                setComments(response.data);
+            });
+        }
+    }, [groupId, comments]);
+    
 
-        fetchComments();
-    }, [groupId]);
-
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         setValue('message', '', {shouldValidate: true});
         
         axios.post('/api/comments', {
             ...data,
             netid: groupId
         });
-        
+
+        toast.success("Comment has been added!", {
+            duration: 2000
+        });
+
+        const response = await fetchComments(groupId);
+        setComments(response.data);
     };
 
     return (
@@ -100,3 +118,5 @@ export const Comments = ({groupId} : {groupId: string}) => {
         </div>
     );
 }
+
+export default Comments;

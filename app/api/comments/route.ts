@@ -1,4 +1,5 @@
 
+
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
@@ -19,13 +20,10 @@ export async function POST (
             }
         });
 
-        
         return new NextResponse(
             JSON.stringify({ message: "Comment created successfully", data: newComment }),
             { status: 201 }
         );
-        
-
     } catch (error: any) {
         console.log(error, 'ERROR_MESSAGES');
         return new NextResponse('InternalError', {status: 500});
