@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 
 
-export const Comments = ({ groupId } : {groupId: any}) => {
+const Comments = ({ groupId } : { groupId: string }) => {
     const [comments, setComments] = useState<any>([]);
 
     const {
@@ -109,3 +109,5 @@ export const Comments = ({ groupId } : {groupId: any}) => {
         </div>
     );
 }
+
+export default Comments;
