@@ -6,7 +6,7 @@ import { AboutGroup } from "./components/AboutGroup";
 import Comments from "./comments/page";
 
 interface IParams {
-    groupId: any;
+    groupId: string | null;
 }
 
 const GroupId = async ({ params } : {params : IParams}) => {
