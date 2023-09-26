@@ -4,21 +4,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import MessageInput from "./components/MessageInput";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import getComments from "@/app/actions/getComments";
 import toast from "react-hot-toast";
 
 
-interface Comment {
-    id: string;
-    content: string;
-}
 
 interface CommentsProps {
     groupId: string;
 }
   
 const Comments: React.FC<CommentsProps> = ({ groupId }) => {
-    const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<any>([]);
 
     const {
         register,
@@ -108,7 +103,7 @@ const Comments: React.FC<CommentsProps> = ({ groupId }) => {
             <div className="mt-5">
                 <h2 className="text-xl font-semibold mb-3">Comments:</h2>
                 <ul>
-                {comments.map((comment) => (
+                {comments.map((comment:any) => (
                     <li key={comment.id} className="mb-2">
                     {comment.content}
                     </li>
