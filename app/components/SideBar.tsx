@@ -39,6 +39,7 @@ const Sidebar = ({ updateGroups, reset, children }: SidebarProps) => {
         py-5
       ">
         <h3 className="text-1xl font-bold">Search Club</h3>
+        <p className="text-sm mt-1">Exact NetID is required</p>
         <form>
           <input type="text" placeholder='Y/CS' onChange={handleChange} className="mt-2 outline-none rounded-md py-2 px-5 w-full text-sm" />
         </form>
